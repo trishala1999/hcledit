@@ -141,6 +141,11 @@ func (w *Walker) walkBlock(body *hclwrite.Body, queries []query.Query, index int
 					return err
 				}
 			}
+		} else if blockIndex == len(queries) {
+			switch w.Mode {
+			case Delete:
+				body.RemoveBlock(block)
+			}
 		}
 	}
 
